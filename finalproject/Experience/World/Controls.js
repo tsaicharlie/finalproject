@@ -1,5 +1,6 @@
 import Experience from "../Experience.js"
 import * as THREE from 'three'
+
 export default class Controls{
     constructor(){
         
@@ -13,6 +14,13 @@ export default class Controls{
         this.camera=this.experience.camera
         this.setPath()
         this.onWheel()
+        this.lerp={
+            current:0,
+            target:0,
+            ease:0.1
+        }
+        this.position=new THREE.Vector3(0,0,0)
+        this.lookAtPosition=new THREE.Vector3(0,0,0)
         
     }
     setPath(){
@@ -40,17 +48,22 @@ export default class Controls{
     }
     onWheel(){
         window.addEventListener('wheel',(e)=>{
-            console.log(e);
+            
             if(e.deltaY>0){
-                this,this.progress+=0.1
+                this.lerp.target+=0.1
+                this.back=false
             }
             else{
-                this.progress-=0.1
-                if(this.progress<0){
-                    this.progress=1
-                }
+                this.lerp.target-=0.1
+                this.back=true
+                // if(this.lerp.target<0){
+                //     this.lerp.current=1 
+                //     this.lerp.target=1
+                // }
             }
-        })
+        }
+        )
+    
     }
     
     
@@ -58,10 +71,23 @@ export default class Controls{
         
     }
     update(){
-        this.curve.getPointAt(this.progress%1,this.dummyCurve)
-
-        // this.progress-=0.001
         
-        this.camera.orthographicCamera.position.copy(this.dummyCurve)
+        this.lerp.current=gsap.utils.interpolate(
+            this.lerp.current,
+            this.lerp.target,
+            this.lerp.ease
+        )
+        if(this.back){
+            this.lerp.target-=0.01
+        }else{
+            this.lerp.target+=0.01
+        }
+        this.lerp.target+=0.001
+        this.lerp.target=gsap.utils.clamp(0,1,this.lerp.target)
+        this.lerp.current=gsap.utils.clamp(0,1,this.lerp.current)
+        this.curve.getPointAt(this.lerp.current%1,this.position)
+        this.curve.getPointAt(this.lerp.current+0.001,this.lookAtPosition)
+        this.camera.orthographicCamera.position.copy(this.position)
+        this.camera.orthographicCamera.lookAt(this.lookAtPosition)
     }
 }
