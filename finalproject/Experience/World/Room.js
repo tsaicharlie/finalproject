@@ -5,11 +5,14 @@ export default class Room{
         this.experience=new Experience();
         this.scene=this.experience.scene;
         this.resources=this.experience.resources;
+        this.time=this.experience.time
         this.room=this.resources.items.room
         // console.log(this.room);
         this.actualRoom=this.room.scene
-        console.log(this.actualRoom.children);
+        console.log('actualroom'+this.actualRoom);
+        console.log(this.room);
         this.setModel()
+        this.setAnimation()
 
         
         
@@ -42,7 +45,7 @@ export default class Room{
                 child.children[0].material.opacity=1
                 // child.children[0].material.transparent=true
                 child.children[0].material.color.set(0x6dd9ee)
-                console.log(child.children[0]);
+                // console.log(child.children[0]);
             }
             if(child.name==='Computer'){
                 child.children[1].material=new THREE.MeshBasicMaterial({
@@ -53,12 +56,17 @@ export default class Room{
         this.scene.add(this.actualRoom)
         this.actualRoom.scale.set(0.1,0.1,0.1)
     }
+    setAnimation(){
+        this.mixer=new THREE.AnimationMixer(this.actualRoom)
+        this.swim=this.mixer.clipAction(this.room.animations[5])
+        this.swim.play()
+    }
     
     
     resize(){
         
     }
     update(){
-
+        this.mixer.update(this.time.delta*0.001)
     }
 }
