@@ -29,7 +29,7 @@ export default class Room{
         // this.actualRoom.children[18].material.ior=3
         // this.actualRoom.children[18].material.transmission=1;
         // this.actualRoom.children[18].material.opacity=1
-        console.log(this.actualRoom.position);
+        // console.log(this.actualRoom.children);
         this.actualRoom.rotation.x=-Math.PI/2*0.4
         this.actualRoom.children.forEach((child) => {
             child.castShadow=true
@@ -57,6 +57,27 @@ export default class Room{
                     map:this.resources.items.screen,
                 })
             }
+            if(child.name==='Mini_Floor'){
+                child.position.x=7.44055;
+                child.position.z=-13.820406;
+                // child.scale.set(2,2,2)
+                // child.position.y=-8.83572;
+
+            }
+            if(child.name==='Mailbox'||child.name==='Lamp'||child.name==='FloorFirst'||child.name==='FloorSecond'||child.name==='FloorThird'||child.name==='Dirt'||child.name==='Flower1'||child.name==='Flower2'){
+                child.scale.set(0,0,0)
+                // child.position.z=-13.820406;
+                // child.scale.set(2,2,2)
+                // child.position.y=-8.83572;
+
+            }
+            // if(child.name==='Shelves'){
+            //     child.children[10].material=new THREE.MeshBasicMaterial({
+            //         map:'../../../../public/textures/1519855918965.jfif',
+            //     })
+            //     console.log(child.children[10]);
+                
+            // }
         });
         this.scene.add(this.actualRoom)
         this.actualRoom.scale.set(0.7,0.7,0.7)

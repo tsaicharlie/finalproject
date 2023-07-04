@@ -14,10 +14,12 @@ export default class World {
         this.resources=this.experience.resources
         
         this.resources.on('ready',()=>{
-            this.room=new Room()
             this.environment=new Environment()
-            this.controls=new Controls()
+            this.room=new Room()
             this.floor=new Floor()
+            
+            this.controls=new Controls()
+            
             console.log('created room');
         })
         

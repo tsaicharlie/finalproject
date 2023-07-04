@@ -19,10 +19,12 @@ export default class Camera {
         this.perspectiveCamera.position.x = -1
         this.perspectiveCamera.position.y = 45
         this.perspectiveCamera.position.z = 30
-        this.perspectiveCamera.lookAt(0,0,0)
+        // this.perspectiveCamera.lookAt(0,0,0) 
+        // this.cameraHelper=new THREE.CameraHelper(this.perspectiveCamera)
+        // this.scene.add(this.cameraHelper)
     };
     createOrthographicCamera() {
-        this.frustrum = 5;
+        
         this.orthographicCamera = new THREE.OrthographicCamera(
             (-this.sizes.aspect * this.sizes.frustrum) / 2,
             (this.sizes.aspect * this.sizes.frustrum) / 2,
@@ -31,25 +33,26 @@ export default class Camera {
             -100,
             100
         );
-        // this.orthographicCamera.position.y=4
-        // this.orthographicCamera.position.z=5
-        // this.orthographicCamera.position.x=-Math.PI/6
         this.scene.add(this.orthographicCamera);
+        this.orthographicCamera.position.y=4
+        this.orthographicCamera.position.z=5
+        this.orthographicCamera.position.x=-Math.PI/6
+        
         // const axesHelper = new THREE.AxesHelper(5);
         // this.scene.add(axesHelper);
-        // const size = 20;
-        // const divisions = 20;
+        const size = 20;
+        const divisions = 20;
 
         // const gridHelper = new THREE.GridHelper(size, divisions);
         // this.scene.add(gridHelper);
         
-        // this.cameraHelper=new THREE.CameraHelper(this.orthographicCamera)
+        // this.cameraHelper=new THREE.CameraHelper(this.perspectiveCamera)
         // this.scene.add(this.cameraHelper)
     }
     setOrbitControls() {
         this.controls = new OrbitControls(this.perspectiveCamera, this.canvas)
         this.controls.enableDamping = true
-        this.controls.enableZoom = true
+        this.controls.enableZoom = false
     }
     resize() {
         this.perspectiveCamera.aspect = this.sizes.aspect;
