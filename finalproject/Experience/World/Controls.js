@@ -15,12 +15,12 @@ export default class Controls {
         this.dummyCurve = new THREE.Vector3(0, 0, 0)
         this.camera = this.experience.camera
         this.room = this.experience.world.room.actualRoom
-        // this.circle=this.experience.world.floor.circle
-        // this.circle2=this.experience.world.floor.circle2
-        // this.circle3=this.experience.world.floor.circle3
+        this.circle=this.experience.world.floor.circle
+        this.circle2=this.experience.world.floor.circle2
+        this.circle3=this.experience.world.floor.circle3
         GSAP.registerPlugin(ScrollTrigger);
         this.setScrollTrigger()
-        this.setSmoothScroll()
+        // this.setSmoothScroll()
         console.log(this.camera.orthographicCamera.position);
         // this.onWheel()
         this.lerp = {
@@ -32,50 +32,50 @@ export default class Controls {
         // this.lookAtPosition=new THREE.Vector3(0,0,0)
 
     }
-    setupASScroll() {
-        // https://github.com/ashthornton/asscroll
-        const asscroll = new ASScroll({
-            disableRaf: true,
-            // ease:2
-        });
+    // setupASScroll() {
+    //     // https://github.com/ashthornton/asscroll
+    //     const asscroll = new ASScroll({
+    //         disableRaf: true,
+    //         // ease:2
+    //     });
 
 
-       GSAP.ticker.add(asscroll.update);
+    //    GSAP.ticker.add(asscroll.update);
 
-        ScrollTrigger.defaults({
-            scroller: asscroll.containerElement
-        });
-
-
-        ScrollTrigger.scrollerProxy(asscroll.containerElement, {
-            scrollTop(value) {
-                if (arguments.length) {
-                    asscroll.currentPos = value;
-                    return;
-                }
-                return asscroll.currentPos;
-            },
-            getBoundingClientRect() {
-                return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-            },
-            fixedMarkers: true
-        });
+    //     ScrollTrigger.defaults({
+    //         scroller: asscroll.containerElement
+    //     });
 
 
-        asscroll.on("update", ScrollTrigger.update);
-        ScrollTrigger.addEventListener("refresh", asscroll.resize);
+    //     ScrollTrigger.scrollerProxy(asscroll.containerElement, {
+    //         scrollTop(value) {
+    //             if (arguments.length) {
+    //                 asscroll.currentPos = value;
+    //                 return;
+    //             }
+    //             return asscroll.currentPos;
+    //         },
+    //         getBoundingClientRect() {
+    //             return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+    //         },
+    //         fixedMarkers: true
+    //     });
 
-        requestAnimationFrame(() => {
-            asscroll.enable({
-                newScrollElements: document.querySelectorAll(".gsap-marker-start, .gsap-marker-end, [asscroll]")
-            });
 
-        });
-        return asscroll;
-    }
-    setSmoothScroll() {
-        this.asscroll=this.setupASScroll()
-    }
+    //     asscroll.on("update", ScrollTrigger.update);
+    //     ScrollTrigger.addEventListener("refresh", asscroll.resize);
+
+    //     requestAnimationFrame(() => {
+    //         asscroll.enable({
+    //             newScrollElements: document.querySelectorAll(".gsap-marker-start, .gsap-marker-end, [asscroll]")
+    //         });
+
+    //     });
+    //     return asscroll;
+    // }
+    // setSmoothScroll() {
+    //     this.asscroll=this.setupASScroll()
+    // }
     setScrollTrigger() {
         ScrollTrigger.matchMedia({
 
@@ -115,7 +115,8 @@ export default class Controls {
                     },
                     z: () => {
                         return this.sizes.height * 0.009
-                    }
+                    },
+                    y:5
                 }, "same");
                 this.secondMoveTimeline.to(this.room.scale, {
                     x: 1.4,
@@ -168,9 +169,14 @@ export default class Controls {
                     },
 
                 }).to(this.room.scale, {
-                    x: 1.5,
-                    y: 1.5,
-                    z: 1.5
+                    x: 1.4,
+                    y: 1.4,
+                    z: 1.4
+                }, 'same').to(this.room.position, {
+                    x:10,
+                    y: 5,
+                    z:5 
+                
                 }, 'same')
                 this.thirdMoveTimeline = new GSAP.timeline({
                     scrollTrigger: {
@@ -183,20 +189,69 @@ export default class Controls {
                     },
 
                 }).to(this.room.position, {
-                    x: 15,
+                    x: 5,
                     y: 10,
                     z: -2.8
-                })
+                }).to(this.room.scale, {
+                    x: 1,
+                    y: 1,
+                    z: 1
+                }, )
             },
 
 
 
             // all 
             "all": () => {
+                this.firstMoveTimeline = new GSAP.timeline({
+                    scrollTrigger: {
+                        trigger: '.first-move',
+                        start: 'top top ',
+                        end: 'bottom bottom',
+                        scrub: 0.6,
+                        invalidateOnRefresh: true,
+                        markers: true
+                    },
+
+                }).to(this.circle.scale,{
+                    x:12,
+                    y:12,
+                    z:12,
+                })
+                this.secondMoveTimeline = new GSAP.timeline({
+                    scrollTrigger: {
+                        trigger: '.second-move',
+                        start: 'top top ',
+                        end: 'bottom bottom',
+                        scrub: 0.6,
+                        invalidateOnRefresh: true,
+                        markers: true
+                    },
+
+                }).to(this.circle2.scale,{
+                    x:12,
+                    y:12,
+                    z:12,
+                })
+                this.thirdMoveTimeline = new GSAP.timeline({
+                    scrollTrigger: {
+                        trigger: '.third-move',
+                        start: 'top top ',
+                        end: 'bottom bottom',
+                        scrub: 0.6,
+                        invalidateOnRefresh: true,
+                        markers: true
+                    },
+
+                }).to(this.circle3.scale,{
+                    x:12,
+                    y:12,
+                    z:12,
+                })
                 this.section = document.querySelectorAll('.section')
                 this.section.forEach(section => {
-                    this.progressWrapper = section.querySelector('.progress-wrapper');
-                    this.progressBar = section.querySelector('.progress-bar')
+                    // this.progressWrapper = section.querySelector('.progress-wrapper');
+                    // this.progressBar = section.querySelector('.progress-bar')
                     if (section.classList.contains('right')) {
                         GSAP.to(section, {
                             borderTopLeftRadius: 10,
@@ -240,19 +295,19 @@ export default class Controls {
                             }
                         })
                     }
-                    GSAP.from(this.progressBar, {
-                        scaleY: 0,
-                        scrollTrigger: {
-                            trigger: section,
-                            start: 'top top ',
-                            end: 'bottom bottom',
-                            scrub: 0.4,
-                            pin: this.progressWrapper,
-                            pinSpacing: false,
-                        }
-                    })
+                    // GSAP.from(this.progressBar, {
+                    //     scaleY: 0,
+                    //     scrollTrigger: {
+                    //         trigger: section,
+                    //         start: 'top top ',
+                    //         end: 'bottom bottom',
+                    //         scrub: 0.4,
+                    //         pin: this.progressWrapper,
+                    //         pinSpacing: false,
+                    //     }
+                    // })
                 })
-                console.log(this.room.children);
+                // console.log(this.room.children);
                 this.thirdMoveTimeline = new GSAP.timeline({
                     scrollTrigger: {
                         trigger: '.third-move',
@@ -278,7 +333,7 @@ export default class Controls {
                             x: 1,
                             z: 1,
                             y: 1,
-                            duration: 0.2,
+                            duration: 0.4,
 
                         })
                     }

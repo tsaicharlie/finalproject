@@ -41,20 +41,21 @@
   padding: 1000px 4%;
   margin: 0;
   background-color:var(--primary-color) ;
+  
   /* overflow: hidden; */
 }
 .left{
   margin-right: auto;
   border-top-right-radius:700px 700px ;
-  border-bottom-right-radius:0px 0px ;
+  border-bottom-right-radius:100px 100px ;
 }
 .right{
   margin-left: auto;
   border-top-left-radius:700px 700px ;
-  border-bottom-left-radius:0px 0px ;
+  border-bottom-left-radius:100px 100px ;
 }
 /* ------------progress bar -------------- */
-.progress-wrapper{
+/* .progress-wrapper{
   position: relative;
   height: 0;
   width: 12px;
@@ -77,7 +78,7 @@
   background-color: var(--primary-pink);
   transform-origin: top center;
   transform: scaleY(1);
-}
+} */
 .section-intro-wrapper{
   position: relative;
   padding: 20% 5%;
@@ -159,12 +160,12 @@
 .hero-main{
   position: absolute;
   bottom: 168px;
-  left: 0;
+  left: -10%;
 }
 .hero-second{
   position: absolute;
   top: calc(50%-120px);
-  right: 0;
+  right: -10%;
 }
 .hero-main-description{
   font-size: 60px;

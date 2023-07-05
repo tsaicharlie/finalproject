@@ -29,8 +29,10 @@ export default class Room{
         // this.actualRoom.children[18].material.ior=3
         // this.actualRoom.children[18].material.transmission=1;
         // this.actualRoom.children[18].material.opacity=1
-        // console.log(this.actualRoom.children);
+        console.log(this.actualRoom.children);
         this.actualRoom.rotation.x=-Math.PI/2*0.4
+        this.actualRoom.castShadow=true
+        this.actualRoom.receiveShadow=true
         this.actualRoom.children.forEach((child) => {
             child.castShadow=true
             child.receiveShadow=true
@@ -71,12 +73,11 @@ export default class Room{
                 // child.position.y=-8.83572;
 
             }
-            // if(child.name==='Shelves'){
-            //     child.children[10].material=new THREE.MeshBasicMaterial({
-            //         map:'../../../../public/textures/1519855918965.jfif',
-            //     })
-            //     console.log(child.children[10]);
-                
+            // child.scale.set(0,0,0)
+            // if(child.name==='Cube'){
+            //     child.scale.set(10,10,10)
+            //     child.position.set(10,10,10)
+            //     child.rotation.y=-Math.PI/4
             // }
         });
         this.scene.add(this.actualRoom)
