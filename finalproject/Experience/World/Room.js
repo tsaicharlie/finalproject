@@ -10,6 +10,7 @@ export default class Room{
         this.room=this.resources.items.room
         // console.log(this.room);
         this.actualRoom=this.room.scene
+        this.roomChildren={}
         // console.log('actualroom'+this.actualRoom);
         // console.log(this.room);
         this.lerp={
@@ -73,15 +74,17 @@ export default class Room{
                 // child.position.y=-8.83572;
 
             }
-            // child.scale.set(0,0,0)
-            // if(child.name==='Cube'){
-            //     child.scale.set(10,10,10)
-            //     child.position.set(10,10,10)
-            //     child.rotation.y=-Math.PI/4
-            // }
+            child.scale.set(0,0,0)
+            if(child.name==='Cube'){
+                child.scale.set(10,10,10)
+                child.position.set(0,0,0)
+                child.rotation.y=-Math.PI/4
+            }
+            this.roomChildren[child.name.toLowerCase()]=child
         });
         this.scene.add(this.actualRoom)
         this.actualRoom.scale.set(0.7,0.7,0.7)
+        // this.roomChildren[child.name]=child
         
     }
     setAnimation(){

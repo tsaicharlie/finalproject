@@ -19,6 +19,7 @@ export default class Controls {
         this.circle2=this.experience.world.floor.circle2
         this.circle3=this.experience.world.floor.circle3
         GSAP.registerPlugin(ScrollTrigger);
+        document.querySelector('.page').style.overflow='visible'
         this.setScrollTrigger()
         // this.setSmoothScroll()
         console.log(this.camera.orthographicCamera.position);
@@ -89,7 +90,7 @@ export default class Controls {
                         end: 'bottom bottom',
                         scrub: 0.6,
                         invalidateOnRefresh: true,
-                        markers: true
+                        // markers: true
                     },
 
                 })
@@ -105,7 +106,7 @@ export default class Controls {
                         end: 'bottom bottom',
                         scrub: 0.6,
                         invalidateOnRefresh: true,
-                        markers: true
+                        // markers: true
                     },
 
                 })
@@ -130,7 +131,7 @@ export default class Controls {
                         end: 'bottom bottom',
                         scrub: 0.6,
                         invalidateOnRefresh: true,
-                        markers: true
+                        // markers: true
                     },
 
                 })
@@ -150,7 +151,7 @@ export default class Controls {
                         end: 'bottom bottom',
                         scrub: 0.6,
                         invalidateOnRefresh: true,
-                        markers: true
+                        // markers: true
                     },
 
                 }).to(this.room.scale, {
@@ -165,7 +166,7 @@ export default class Controls {
                         end: 'bottom bottom',
                         scrub: 0.6,
                         invalidateOnRefresh: true,
-                        markers: true
+                        // markers: true
                     },
 
                 }).to(this.room.scale, {
@@ -175,7 +176,7 @@ export default class Controls {
                 }, 'same').to(this.room.position, {
                     x:10,
                     y: 5,
-                    z:5 
+                    z:-10 
                 
                 }, 'same')
                 this.thirdMoveTimeline = new GSAP.timeline({
@@ -185,13 +186,13 @@ export default class Controls {
                         end: 'bottom bottom',
                         scrub: 0.6,
                         invalidateOnRefresh: true,
-                        markers: true
+                        // markers: true
                     },
 
                 }).to(this.room.position, {
                     x: 5,
                     y: 10,
-                    z: -2.8
+                    z: 5    
                 }).to(this.room.scale, {
                     x: 1,
                     y: 1,
@@ -210,7 +211,7 @@ export default class Controls {
                         end: 'bottom bottom',
                         scrub: 0.6,
                         invalidateOnRefresh: true,
-                        markers: true
+                        // markers: true
                     },
 
                 }).to(this.circle.scale,{
@@ -225,7 +226,7 @@ export default class Controls {
                         end: 'bottom bottom',
                         scrub: 0.6,
                         invalidateOnRefresh: true,
-                        markers: true
+                        // markers: true
                     },
 
                 }).to(this.circle2.scale,{
@@ -240,7 +241,7 @@ export default class Controls {
                         end: 'bottom bottom',
                         scrub: 0.6,
                         invalidateOnRefresh: true,
-                        markers: true
+                        // markers: true
                     },
 
                 }).to(this.circle3.scale,{
@@ -260,7 +261,7 @@ export default class Controls {
                                 start: 'top bottom',
                                 end: 'top top ',
                                 scrub: 0.6,
-                                markers: true,
+                                // markers: true,
                             }
                         })
                         GSAP.to(section, {
@@ -270,7 +271,7 @@ export default class Controls {
                                 start: 'bottom bottom',
                                 end: 'bottom top ',
                                 scrub: 0.6,
-                                markers: true,
+                                // markers: true,
                             }
                         })
                     } else {
@@ -281,7 +282,7 @@ export default class Controls {
                                 start: 'top bottom',
                                 end: 'top top ',
                                 scrub: 0.6,
-                                markers: true,
+                                // markers: true,
                             }
                         })
                         GSAP.to(section, {
@@ -291,7 +292,7 @@ export default class Controls {
                                 start: 'bottom bottom',
                                 end: 'bottom top ',
                                 scrub: 0.6,
-                                markers: true,
+                                // markers: true,
                             }
                         })
                     }
@@ -315,7 +316,7 @@ export default class Controls {
                         end: 'bottom bottom',
                         scrub: 0.6,
                         invalidateOnRefresh: true,
-                        markers: true
+                        // markers: true
                     },
 
                 })
@@ -325,6 +326,7 @@ export default class Controls {
                             x: -7.44055,
                             z: 14.820406,
                             duration: 0.5,
+                            scrub:0.6
 
                         })
                     }
@@ -334,6 +336,7 @@ export default class Controls {
                             z: 1,
                             y: 1,
                             duration: 0.4,
+                            scrub:0.6
 
                         })
                     }

@@ -7,7 +7,7 @@ import World from './World/World'
 import Resources from './Utils/Resources'
 import asset from './Utils/asset'
 import Preloader from './Preloader'
-
+import Controls from './World/Controls'
 export default class Experience {
     static instance 
     constructor(canvas) {
@@ -24,6 +24,9 @@ export default class Experience {
         this.resources=new Resources(asset);
         this.world=new World();
         this.preloader=new Preloader();
+        this.preloader.on('enablecontrols',()=>{
+            this.controls=new Controls()
+        })
 
         this.time.on('update',()=>{
             this.update();
@@ -37,6 +40,7 @@ export default class Experience {
         this.camera.update()
         this.world.update()
         this.renderer.update()
+        this.preloader.update()
     };
     resize(){
         this.camera.resize()
